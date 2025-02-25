@@ -16,11 +16,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Node.js and Yarn
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'  # You can adjust this version as needed
+        node-version: '20'  # Adjust this version as needed
         cache: 'yarn'
+
+    - name: Install Yarn
+      run: |
+        npm install -g yarn  # Install Yarn globally
 
     - name: Install dependencies with Yarn
       run: yarn install --frozen-lockfile
