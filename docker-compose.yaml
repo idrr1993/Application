@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  mongodb:
+    image: mongodb/mongodb-community-server
+    container_name: mongodb
+    restart: unless-stopped
+    volumes:
+      - mongodbdata:/data/db
+      
+    networks:
+      - backhand
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGODB_URI: ${MONGODB_URI}  
+
+  app:
+    build: .
+    container_name: demo-crm
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    networks:
+      - backhand
+    environment:
+      MONGODB_URI: ${MONGODB_URI}  
+      RABBITMQ_URI: ${RABBITMQ_URI}  
+      LOG_LEVEL: ${LOG_LEVEL}  
+      PERSISTENCE: ${PERSISTENCE}  
+
+networks:
+  backhand:
+
+volumes:
+  mongodbdata:
