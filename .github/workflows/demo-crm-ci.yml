@@ -17,10 +17,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install --no-fund --no-audit --legacy-peer-deps
+      - name: Install dependencies without lock file
+        run: npm install --no-fund --no-audit --no-save
 
       - name: Run unit tests
         run: npm test
