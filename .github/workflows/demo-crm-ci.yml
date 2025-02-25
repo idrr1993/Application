@@ -3,45 +3,36 @@ name: Demo Crm CI
 on:
   push:
     branches:
-      - main  # Adjust the branch as needed
+      - main
   pull_request:
     branches:
-      - main  # Adjust the branch as needed
+      - main
 
 jobs:
-  build-and-test:
+  build-and-package:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Node.js (updated to version 18.x)
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'  # Updated Node.js version to be compatible with Next.js
+    - name: Set up Yarn
+      uses: borales/actions-yarn@v2
 
-    - name: Install dependencies
-      run: npm install  # Adjust this if using a different package manager
+    - name: Build Docker image
+      run: docker build -t nextjs-app .
 
-    - name: Build the app
-      run: npm run build  # Adjust the build command if necessary
-
-    - name: Start the app in the background (use next dev for development)
-      run: npm run dev &  # Start Next.js in development mode (it will run on port 3000 by default)
-
-    - name: Wait for the app to be ready
-      run: sleep 10  # Wait for a few seconds to ensure the app is up (adjust based on your app)
+    - name: Run Docker container
+      run: |
+        docker run -d -p 3000:3000 nextjs-app
+        sleep 10  # Allow the app to fully start
 
     - name: Test with curl
       run: |
-        response=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000)
+        response=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000/your-endpoint)
         if [ "$response" -ne 200 ]; then
           echo "Test failed with response code $response"
           exit 1
         else
           echo "Test passed with response code $response"
         fi
-
-    - name: Run unit tests
-      run: npm test  # Adjust the test command if necessary
