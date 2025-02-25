@@ -9,7 +9,7 @@ on:
       - main  # Adjust the branch as needed
 
 jobs:
-  build and test:
+  build_and_test:
     runs-on: ubuntu-latest
 
     steps:
