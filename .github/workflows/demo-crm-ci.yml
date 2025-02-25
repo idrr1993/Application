@@ -26,17 +26,22 @@ jobs:
 
     - name: Build the app
       run: npm run build  # Adjust the build command if necessary
-      
-    - name: Checkout repository
-      uses: actions/checkout@v3
 
-    - name: Set up Node.js (or your preferred environment)
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'  # Adjust the version as needed
+    - name: Start the app in the background
+      run: npm start &  # Start the app in the background (adjust command as needed)
 
-    - name: Install dependencies
-      run: npm install  # Adjust this if using a different package manager
+    - name: Wait for the app to be ready
+      run: sleep 10  # Wait for a few seconds to ensure the app is up (adjust based on your app)
+
+    - name: Test with curl
+      run: |
+        response=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000/your-endpoint)  # Replace with your actual URL and endpoint
+        if [ "$response" -ne 200 ]; then
+          echo "Test failed with response code $response"
+          exit 1
+        else
+          echo "Test passed with response code $response"
+        fi
 
     - name: Run unit tests
       run: npm test  # Adjust the test command if necessary
