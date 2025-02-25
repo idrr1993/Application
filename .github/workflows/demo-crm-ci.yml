@@ -16,8 +16,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Yarn
-      uses: borales/actions-yarn@v2
+    - name: Set up Node.js and Yarn
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'  # You can adjust this version as needed
+        cache: 'yarn'
+
+    - name: Install dependencies with Yarn
+      run: yarn install --frozen-lockfile
 
     - name: Build Docker image
       run: docker build -t nextjs-app .
