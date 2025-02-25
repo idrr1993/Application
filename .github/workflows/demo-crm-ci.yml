@@ -28,14 +28,14 @@ jobs:
       run: npm run build  # Adjust the build command if necessary
 
     - name: Start the app in the background (use next dev for development)
-      run: npm run dev &  # Use npm run dev for running Next.js in development mode
+      run: npm run dev &  # Start Next.js in development mode (it will run on port 3000 by default)
 
     - name: Wait for the app to be ready
       run: sleep 10  # Wait for a few seconds to ensure the app is up (adjust based on your app)
 
     - name: Test with curl
       run: |
-        response=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000/your-endpoint)  # Replace with your actual URL and endpoint
+        response=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000/your-endpoint)  # Replace with your actual API route or page
         if [ "$response" -ne 200 ]; then
           echo "Test failed with response code $response"
           exit 1
