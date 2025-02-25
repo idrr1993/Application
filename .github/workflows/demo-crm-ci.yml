@@ -1,33 +1,42 @@
-name: CI Pipeline
+name: Demo Crm CI
 
 on:
   push:
     branches:
-      - main
+      - main  # Adjust the branch as needed
+  pull_request:
+    branches:
+      - main  # Adjust the branch as needed
 
 jobs:
-  build_application_and_unit_test:
+  build and test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+    - name: Set up Node.js (or your preferred environment)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Adjust the version as needed
 
-      - name: Install dependencies without lock file
-        run: npm install --no-fund --no-audit --no-save
+    - name: Install dependencies
+      run: npm install  # Adjust this if using a different package manager
 
-      - name: Run unit tests
-        run: npm app
+    - name: Build the app
+      run: npm run build  # Adjust the build command if necessary
+      
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Start application
-        run: npm run build && npm start &
+    - name: Set up Node.js (or your preferred environment)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Adjust the version as needed
 
-      - name: Wait for application to start
-        run: |
-          sleep 5
-          curl -I http://localhost:3000 || (echo "Server did not start" && exit 1)
+    - name: Install dependencies
+      run: npm install  # Adjust this if using a different package manager
+
+    - name: Run unit tests
+      run: npm test  # Adjust the test command if necessary
