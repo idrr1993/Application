@@ -27,8 +27,8 @@ jobs:
     - name: Build the app
       run: npm run build  # Adjust the build command if necessary
 
-    - name: Start the app in the background
-      run: npm start &  # Start the app in the background (adjust command as needed)
+    - name: Start the app in the background (use next dev for development)
+      run: npm run dev &  # Use npm run dev for running Next.js in development mode
 
     - name: Wait for the app to be ready
       run: sleep 10  # Wait for a few seconds to ensure the app is up (adjust based on your app)
