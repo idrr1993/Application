@@ -35,7 +35,7 @@ jobs:
 
     - name: Test with curl
       run: |
-        response=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000/your-endpoint)  # Replace with your actual API route or page
+        response=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000)
         if [ "$response" -ne 200 ]; then
           echo "Test failed with response code $response"
           exit 1
