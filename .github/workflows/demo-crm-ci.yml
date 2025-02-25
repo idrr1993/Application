@@ -1,0 +1,11 @@
+name: Demo Crm CI
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build_application_and_unit_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
