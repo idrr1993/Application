@@ -7,7 +7,7 @@ on:
 
 jobs:
   build_application_and_unit_test:
-    runs-on: ubuntu-latest  # <-- Correct indentation
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -16,11 +16,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-         node-version: 18
-         cache: 'npm'
+          node-version: 18
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-fund --no-audit --legacy-peer-deps
 
       - name: Run unit tests
         run: npm test
