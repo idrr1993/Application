@@ -29,20 +29,13 @@ jobs:
     - name: Install dependencies with Yarn
       run: yarn install --frozen-lockfile
 
-    - name: Build Docker image
-      run: docker build -t nextjs-app .
-
-    - name: Run Docker container
-      run: |
-        docker run -d -p 3000:3000 nextjs-app
-        sleep 10  # Allow the app to fully start
-
-    - name: Test with curl
-      run: |
-        response=$(curl --write-out "%{http_code}" --silent --output /dev/null http://localhost:3000/your-endpoint)
-        if [ "$response" -ne 200 ]; then
-          echo "Test failed with response code $response"
-          exit 1
-        else
-          echo "Test passed with response code $response"
-        fi
+    - name: Package the application
+      run: docker build -t demo-crm:latest .
+    - name: build container with docker compose
+      run: docker compose up -d
+    - name: Wait for the application to start
+      run: sleep 10
+    - name: Check E2E
+      run: curl http://localhost:3000
+    - name: container delete
+      run: docker compose down
