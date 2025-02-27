@@ -34,4 +34,4 @@ jobs:
       run: sleep 10
 
     - name: Test API with curl
-      run: curl -f http://localhost:3000/health || (echo "App failed to respond" && exit 1)
+      run: curl -f http://localhost:3000
