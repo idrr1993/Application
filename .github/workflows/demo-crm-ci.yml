@@ -28,7 +28,7 @@ jobs:
       run: yarn build
       
     - name: Start Application
-      run: yarn start &
+      run: yarn run dev &
       
     - name: Wait for the app to start
       run: sleep 10
