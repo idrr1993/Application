@@ -34,7 +34,7 @@ jobs:
     - name: Wait for the app to start
       run: |
         for i in {1..30}; do
-          curl -s http://localhost:3000 && break
+          curl http://localhost:3000 && break
           echo "Waiting for app..."
           sleep 2
         done
