@@ -11,7 +11,6 @@ on:
 jobs:
   build-and-unit-test:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -21,9 +20,18 @@ jobs:
       with:
         node-version: '20'  
         cache: 'yarn'
+        
     - name: Install Dependencies
       run: yarn install --frozen-lockfile
 
     - name: Build Application
       run: yarn build
- 
+      
+    - name: Start Application
+      run: yarn start &
+      
+    - name: Wait for the app to start
+      run: sleep 10
+
+    - name: Test API with curl
+      run: curl -f http://localhost:3000/health || (echo "App failed to respond" && exit 1)
