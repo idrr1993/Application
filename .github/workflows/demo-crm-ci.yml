@@ -33,8 +33,34 @@ jobs:
 
     - name: Wait for the app to start
       run: |
-        for i in {1..30}; do
+        for i in {1..10}; do
           curl http://localhost:3000 && break
           echo "Waiting for app..."
           sleep 2
         done
+        
+  package_and_E2E:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+  
+    - name: Package the application
+      run: docker build -t demo-crm:latest .
+    - name: container delete
+      run: docker compose down
+    - name: build container with docker compose
+      run: docker compose up -d
+    - name: Wait for the application to start and mkae E2E test
+      run: |
+        for i in {1..10}; do
+          curl http://localhost:3000 && break
+          echo "Waiting for app..."
+          sleep 2
+        done
+
+	
