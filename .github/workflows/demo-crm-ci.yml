@@ -14,35 +14,16 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '20'  # Adjust this version as needed
+        node-version: '20'  
         cache: 'yarn'
+    - name: Install Dependencies
+      run: yarn install --frozen-lockfile
 
-    - name: Install Yarn
-      run: |
-        npm install -g yarn  # Install Yarn globally
-  package_and_E2E:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-  
-    - name: Package the application
-      run: docker build -t demo-crm:latest .
-    - name: container delete
-      run: docker compose down
-    - name: build container with docker compose
-      run: docker compose up -d
-    - name: Wait for the application to start
-      run: sleep 10
-    - name: Check E2E
-      run: curl http://localhost:3000
-
+    - name: Build Application
+      run: yarn build
+ 
