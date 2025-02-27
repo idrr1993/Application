@@ -8,13 +8,18 @@ services:
     restart: unless-stopped
     volumes:
       - mongodbdata:/data/db
-      
     networks:
       - backhand
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
-      MONGODB_URI: ${MONGODB_URI}  
+      MONGODB_URI: ${MONGODB_URI}
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
 
   app:
     build: .
@@ -23,14 +28,15 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_healthy
     networks:
       - backhand
     environment:
-      MONGODB_URI: ${MONGODB_URI}  
-      RABBITMQ_URI: ${RABBITMQ_URI}  
-      LOG_LEVEL: ${LOG_LEVEL}  
-      PERSISTENCE: ${PERSISTENCE}  
+      MONGODB_URI: ${MONGODB_URI}
+      RABBITMQ_URI: ${RABBITMQ_URI}
+      LOG_LEVEL: ${LOG_LEVEL}
+      PERSISTENCE: ${PERSISTENCE}
 
 networks:
   backhand:
