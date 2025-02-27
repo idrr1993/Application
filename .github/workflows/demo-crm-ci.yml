@@ -62,5 +62,3 @@ jobs:
           echo "Waiting for app..."
           sleep 2
         done
-
-	
