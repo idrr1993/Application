@@ -37,6 +37,7 @@ jobs:
           curl http://localhost:3000 && break
           echo "Waiting for app..."
           sleep 2
+    
         done
         
   package_and_E2E:
@@ -62,3 +63,11 @@ jobs:
           echo "Waiting for app..."
           sleep 2
         done
+    - name: Configure AWS credentials
+      run: aws configure set aws_access_key_id ${{ secrets.ECR_ACCESS_KEY }} && aws configure set aws_secret_access_key ${{ secrets.ECR_SECRET_KEY }} && aws configure set region ap-south-1
+    - name: Authenticat Docker to ECR 
+      run: aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 881490105022.dkr.ecr.ap-south-1.amazonaws.com
+    - name: Tag Docker image
+      run: docker tag development/demo-crm:latest 881490105022.dkr.ecr.ap-south-1.amazonaws.com/development/demo-crm:latest
+    - name: Push Docker image to ECR
+      run: docker push 881490105022.dkr.ecr.ap-south-1.amazonaws.com/development/demo-crm:latest
