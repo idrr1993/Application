@@ -68,6 +68,6 @@ jobs:
     - name: Authenticat Docker to ECR 
       run: aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 881490105022.dkr.ecr.ap-south-1.amazonaws.com
     - name: Tag Docker image
-      run: docker tag development/demo-crm:latest 881490105022.dkr.ecr.ap-south-1.amazonaws.com/development/demo-crm:latest
+      run: docker tag demo-crm:latest 881490105022.dkr.ecr.ap-south-1.amazonaws.com/development/demo-crm:latest
     - name: Push Docker image to ECR
       run: docker push 881490105022.dkr.ecr.ap-south-1.amazonaws.com/development/demo-crm:latest
