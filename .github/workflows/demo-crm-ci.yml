@@ -65,6 +65,21 @@ jobs:
         done
     - name: Configure AWS credentials
       run: aws configure set aws_access_key_id ${{ secrets.ECR_ACCESS_KEY }} && aws configure set aws_secret_access_key ${{ secrets.ECR_SECRET_KEY }} && aws configure set region ap-south-1
+    - name: Delete existing ECR image (if exists)
+      run: |
+        #IMAGE_TAG="latest"
+        #REPO_NAME="development/demo-crm"
+        #AWS_REGION="ap-south-1"
+        #AWS_ACCOUNT_ID="881490105022"
+        
+        IMAGE_EXISTS=$(aws ecr describe-images --repository-name development/demo-crm --image-ids imageTag=latest --region ap-south-1 --query 'imageDetails' --output text || echo "NOT_FOUND")
+        
+        if [[ "$IMAGE_EXISTS" != "NOT_FOUND" ]]; then
+          echo "Deleting existing image..."
+          aws ecr batch-delete-image --repository-name development/demo-crm --image-ids imageTag=latest --region ap-south-1
+        else
+          echo "No existing image to delete."
+        fi
     - name: Authenticat Docker to ECR 
       run: aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 881490105022.dkr.ecr.ap-south-1.amazonaws.com
     - name: Tag Docker image
