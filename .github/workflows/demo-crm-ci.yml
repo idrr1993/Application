@@ -118,5 +118,5 @@ jobs:
         
     - name: Update Kubernetes Deployment
       run: |
-        kubectl set image deployment/crm-deployment:latest crm=881490105022.dkr.ecr.ap-south-1.amazonaws.com/development/demo-crm:latest
-        kubectl rollout status deployment/crm-deployment:latest
+        kubectl set image deployment/crm-deployment crm=881490105022.dkr.ecr.ap-south-1.amazonaws.com/development/demo-crm:latest
+        kubectl rollout status deployment/crm-deployment
