@@ -104,6 +104,18 @@ jobs:
         aws configure set region ap-south-1
         aws eks update-kubeconfig --region ap-south-1 --name idan-raviv-cluster
         
+    - name: Wait for image to be available in ECR
+      run: |
+        for i in {1..10}; do
+          IMAGE_EXISTS=$(aws ecr describe-images --repository-name development/demo-crm --image-ids imageTag=latest --region ap-south-1 --query 'imageDetails' --output text || echo "NOT_FOUND")
+          if [[ "$IMAGE_EXISTS" != "NOT_FOUND" ]]; then
+            echo "Image found in ECR."
+            break
+          fi
+          echo "Waiting for image to be available..."
+          sleep 10
+        done
+        
     - name: Update Kubernetes Deployment
       run: |
         kubectl set image deployment/crm-deployment:latest crm=881490105022.dkr.ecr.ap-south-1.amazonaws.com/development/demo-crm:latest
