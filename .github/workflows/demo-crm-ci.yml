@@ -21,7 +21,7 @@ jobs:
       with:
         node-version: '20'  
         cache: 'yarn'
-        
+
     - name: Install Dependencies
       run: yarn install --frozen-lockfile
 
@@ -55,6 +55,9 @@ jobs:
       
     - name: container delete
       run: docker compose down
+      
+    - name: testtttt
+      run: ls -l nginx.conf
       
     - name: build container with docker compose
       run: docker compose up -d
