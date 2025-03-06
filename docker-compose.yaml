@@ -32,14 +32,31 @@ services:
         condition: service_healthy
     networks:
       - backhand
+      - frontend
     environment:
       MONGODB_URI: ${MONGODB_URI}
       RABBITMQ_URI: ${RABBITMQ_URI}
       LOG_LEVEL: ${LOG_LEVEL}
       PERSISTENCE: ${PERSISTENCE}
-
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+    networks:
+      - frontend
 networks:
   backhand:
+  frontend:
 
 volumes:
   mongodbdata:
