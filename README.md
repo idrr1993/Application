@@ -28,7 +28,11 @@ The application is deployed onto an AWS EKS cluster, with infrastructure provisi
 
 ## Architecture
 
-[ARCHITECTURE_DESCRIPTION]
+As we can see from the diagram I created three container:
+- [MongoDB - used for DB] 
+- [Demo-Crm application]
+- [Nginx - use as reverse proxy]
+
 
 ![Architecture Diagram](container_diagram.png)
 
