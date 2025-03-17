@@ -22,6 +22,7 @@ Implemented a robust CI/CD pipeline for the Demo-CRM application (a ticketing sy
 - [ArgoCD for automated deployment]
 - [Docker for containerization]
 - [Helm charts for Kubernetes deployment]
+
 The application is deployed onto an AWS EKS cluster, with infrastructure provisioned and managed using Terraform, ensuring scalability, high availability, and automated infrastructure management.
 
 
