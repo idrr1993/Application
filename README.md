@@ -28,17 +28,22 @@ The application is deployed onto an AWS EKS cluster, with infrastructure provisi
 
 ## Architecture
 
-As we can see from the diagram I created three container:
-- MongoDB - used for DB 
-- Demo-Crm application
-- Nginx - use as reverse proxy
-  
-because I used Nginx as reverse proxy i created two seperated network:
-- frontend- in this network I configured Demo-Crm application and Ngnix
-- badckend - in this network I configured Demo-Crm application and MongoDB
 
-this seperation ensure that user cannot reach to our data base (MongoDB) what make our data secured.
-also we can see the port that user can send request to Ngnix (port 80), mean that the only way to send request to our application is send request to port 80.
+As shown in the diagram, the application consists of three containers:
+- MongoDB - The database container that stores application data 
+- Demo-CRM Application - The main backend application running on port 3000.
+- Nginx - Used as a reverse proxy to route incoming traffic to the Demo-CRM application.
+  
+#Network Segmentation
+To enhance security, two separate Docker networks were created:
+- frontend- Connects Nginx and Demo-CRM, allowing external users to access the application only through Nginx.
+- badckend - Connects Demo-CRM and MongoDB, ensuring that the database is isolated from direct user access.
+
+The user can only send requests to Nginx on port 80, preventing direct access to the backend services.
+MongoDB is not exposed to external requests, making the system more secure.
+The separation between frontend and backend networks ensures better security.
+
+
 
 ![Architecture Diagram](container_diagram.png)
 
