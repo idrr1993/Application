@@ -9,11 +9,7 @@ This project demonstrates the implementation of a CI/CD pipeline for a Node.js-b
 - [Technology Stack](#technology-stack)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
-- [CI/CD Pipeline](#cicd-pipeline)
-- [Contributing](#contributing)
-- [Release History](#release-history)
 - [Contact](#contact)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
