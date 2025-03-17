@@ -51,13 +51,11 @@ The separation between frontend and backend networks ensures better security.
 
 | Category             | Technologies   |
 | -------------------- | -------------- |
-| **Infrastructure**   | [TECHNOLOGIES] |
-| **Containerization** | [TECHNOLOGIES] |
-| **CI/CD**            | [TECHNOLOGIES] |
-| **Version Control**  | [TECHNOLOGIES] |
-| **Security**         | [TECHNOLOGIES] |
-| **Application**      | [TECHNOLOGIES] |
-| **Database**         | [TECHNOLOGIES] |
+| **Containerization** | [Docker and Docker compose] |
+| **CI/CD**            | [github action] |
+| **Security**         | [Use Secrets] |
+| **Application**      | [Node.js] |
+| **Database**         | [MongoDB] |
 
 ## Repository Structure
 
