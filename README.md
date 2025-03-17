@@ -30,7 +30,7 @@ The application is deployed onto an AWS EKS cluster, with infrastructure provisi
 
 [ARCHITECTURE_DESCRIPTION]
 
-![Architecture Diagram](images/architecture_diagram.png)
+![Architecture Diagram](container_diagram.png)
 
 ## Technology Stack
 
