@@ -1,6 +1,6 @@
 # [PROJECT_NAME]
 
-> [SHORT_PROJECT_DESCRIPTION] - One or two sentences explaining what this project demonstrates.
+This project demonstrates the implementation of a CI/CD pipeline for a Node.js-based ticketing application
 
 ## Table of Contents
 
@@ -18,13 +18,12 @@
 
 ## Overview
 
-Brief description of the project, its purpose, and what DevOps practices it demonstrates.
+Implemented a robust CI/CD pipeline for the Demo-CRM application (a ticketing system written in Node.js). The pipeline integrates:
+- [ArgoCD for automated deployment]
+- [Docker for containerization]
+- [Helm charts for Kubernetes deployment]
+The application is deployed onto an AWS EKS cluster, with infrastructure provisioned and managed using Terraform, ensuring scalability, high availability, and automated infrastructure management.
 
-Key features:
-
-- [FEATURE_1]
-- [FEATURE_2]
-- [FEATURE_3]
 
 ## Architecture
 
