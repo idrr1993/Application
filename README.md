@@ -34,7 +34,7 @@ As shown in the diagram, the application consists of three containers:
 - Demo-CRM Application - The main backend application running on port 3000.
 - Nginx - Used as a reverse proxy to route incoming traffic to the Demo-CRM application.
   
-#Network Segmentation
+# Network Segmentation
 To enhance security, two separate Docker networks were created:
 - frontend- Connects Nginx and Demo-CRM, allowing external users to access the application only through Nginx.
 - badckend - Connects Demo-CRM and MongoDB, ensuring that the database is isolated from direct user access.
