@@ -37,6 +37,8 @@ because I used Nginx as reverse proxy i created two seperated network:
 - frontend- in this network I configured Demo-Crm application and Ngnix
 - badckend - in this network I configured Demo-Crm application and MongoDB
 
+this seperation ensure that user cannot reach to our data base (MongoDB) what make our data secured.
+also we can see the port that user can send request to Ngnix (port 80), mean that the only way to send request to our application is send request to port 80.
 
 ![Architecture Diagram](container_diagram.png)
 
