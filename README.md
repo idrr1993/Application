@@ -1,4 +1,4 @@
-# [PROJECT_NAME]
+# [CI/CD for Demo-Crm Application]
 
 This project demonstrates the implementation of a CI/CD pipeline for a Node.js-based ticketing application
 
