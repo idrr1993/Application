@@ -86,5 +86,5 @@ run: terraform apply to with the cluster create modle
 
 Idan Raviv - [LinkedIn](https://www.linkedin.com/in/idan-raviv-bb8183207/) - idanraviv1993@gmail.com
 
-Project Link: [https://github.com/[USERNAME]/[REPOSITORY]](https://github.com/[idrr1993]/[Application])
+Project Link: [https://github.com/[idrr1993]/[Application]](https://github.com/[idrr1993]/[Application])
 
