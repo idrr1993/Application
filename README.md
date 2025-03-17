@@ -7,7 +7,6 @@ This project demonstrates the implementation of a CI/CD pipeline for a Node.js-b
 - [Overview](#overview)
 - [Architecture](#architecture)
 - [Technology Stack](#technology-stack)
-- [Repository Structure](#repository-structure)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [CI/CD Pipeline](#cicd-pipeline)
@@ -53,30 +52,19 @@ The separation between frontend and backend networks ensures better security.
 | -------------------- | -------------- |
 | **Containerization** | Docker and Docker compose |
 | **CI/CD**            | github action |
-| **Security**         | Use Secrets |
+| **Security**         | Use Secrets and diffrent networks |
 | **Application**      | Node.js |
 | **Database**         | MongoDB |
 
-## Repository Structure
 
-```
-project-root/
-├── [DIRECTORY_1]/       # [DESCRIPTION]
-│   ├── [FILE_1]         # [DESCRIPTION]
-│   └── [FILE_2]         # [DESCRIPTION]
-├── [DIRECTORY_2]/       # [DESCRIPTION]
-│   ├── [SUBDIRECTORY_1]/# [DESCRIPTION]
-│   └── [SUBDIRECTORY_2]/# [DESCRIPTION]
-└── [FILE_3]             # [DESCRIPTION]
-```
 
 ## Prerequisites
 
 Requirements for building and running the project:
 
-- [PREREQUISITE_1]
-- [PREREQUISITE_2]
-- [PREREQUISITE_3]
+- AWS user to create ECR and EKS 
+- Terraform modle to create EKS
+- docker and docker compose installed
 
 ## Getting Started
 
