@@ -32,9 +32,10 @@ As we can see from the diagram I created three container:
 - MongoDB - used for DB 
 - Demo-Crm application
 - Nginx - use as reverse proxy
+  
 because I used Nginx as reverse proxy i created two seperated network:
-- [frontend- in this network I configured Demo-Crm application and Ngnix]
-- [badckend - in this network I configured Demo-Crm application and MongoDB]
+- frontend- in this network I configured Demo-Crm application and Ngnix
+- badckend - in this network I configured Demo-Crm application and MongoDB
 
 
 ![Architecture Diagram](container_diagram.png)
