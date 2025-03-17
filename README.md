@@ -50,6 +50,7 @@ The separation between frontend and backend networks ensures better security.
 
 | Category             | Technologies   |
 | -------------------- | -------------- |
+| **Infrastructure**   | K8S |
 | **Containerization** | Docker and Docker compose |
 | **CI/CD**            | github action |
 | **Security**         | Use Secrets and diffrent networks |
@@ -62,6 +63,7 @@ The separation between frontend and backend networks ensures better security.
 
 Requirements for building and running the project:
 
+- Demo-crm Application
 - AWS user to create ECR and EKS 
 - Terraform modle to create EKS
 - docker and docker compose installed
@@ -72,104 +74,17 @@ Follow these instructions to set up the project locally and deploy it to your cl
 
 ### Infrastructure Setup
 
-1. **[STEP_1_TITLE]**
+1. **[create ECR]**
 
-```bash
-# [STEP_1_COMMAND_EXAMPLE]
-cd [DIRECTORY]
-[COMMAND_1]
-```
+in AWS user create ECR at the required region
 
-2. **[STEP_2_TITLE]**
+2. **[create EKS cluster]**
 
-```bash
-# [STEP_2_COMMAND_EXAMPLE]
-[COMMAND_2]
-```
-
-Expected output:
-
-```
-[EXPECTED_OUTPUT_EXAMPLE]
-```
-
-3. **[STEP_3_TITLE]**
-
-```bash
-[COMMAND_3]
-```
-
-### Application Deployment
-
-1. **[STEP_1_TITLE]**
-
-```bash
-[COMMAND_1]
-```
-
-2. **[STEP_2_TITLE]**
-
-```bash
-[COMMAND_2]
-```
-
-3. **[STEP_3_TITLE]**
-
-```bash
-[COMMAND_3]
-```
-
-Expected result: [EXPECTED_RESULT_DESCRIPTION]
-
-## CI/CD Pipeline
-
-[PIPELINE_DESCRIPTION]
-
-```mermaid
-graph LR
-    A[Stage 1] --> B[Stage 2]
-    B --> C[Stage 3]
-    C --> D[Stage 4]
-    D --> E[Stage 5]
-```
-
-## Contributing
-
-(For open source projects)
-
-[CONTRIBUTION_GUIDELINES]
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/[FEATURE_NAME]`)
-3. Commit your changes (`git commit -m '[DESCRIPTIVE_MESSAGE]'`)
-4. Push to the branch (`git push origin feature/[FEATURE_NAME]`)
-5. Open a Pull Request
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
-
-## Release History
-
-- 0.2.1
-  - CHANGE:
-- 0.2.0
-  - CHANGE:
-  - ADD:
-- 0.1.1
-  - FIX:
-- 0.1.0
-  - First real release
-  - CHANGE:
-- 0.0.1
-  - Initial Version
+run: terraform apply to with the cluster create modle 
 
 ## Contact
 
-[YOUR_NAME] - LinkedIn - [EMAIL]
+[Idan Raviv] - [LinkedIn](https://www.linkedin.com/in/idan-raviv-bb8183207/) - [idanraviv1993@gmail.com]
 
-Project Link: [https://github.com/[USERNAME]/[REPOSITORY]](https://github.com/[USERNAME]/[REPOSITORY])
+Project Link: [https://github.com/[USERNAME]/[REPOSITORY]](https://github.com/[idrr1993]/[Application])
 
-## Acknowledgments
-
-- [ACKNOWLEDGMENT_1]
-- [ACKNOWLEDGMENT_2]
-- [ACKNOWLEDGMENT_3]
