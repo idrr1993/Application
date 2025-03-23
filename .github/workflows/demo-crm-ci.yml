@@ -53,8 +53,7 @@ jobs:
     - name: Package the application
       run: docker build -t demo-crm:latest .
       
-    - name: container delete
-      run: docker compose down
+
       
     - name: build container with docker compose
       run: docker compose up -d
@@ -69,16 +68,6 @@ jobs:
         
     - name: Configure AWS credentials
       run: aws configure set aws_access_key_id ${{ secrets.ECR_ACCESS_KEY }} && aws configure set aws_secret_access_key ${{ secrets.ECR_SECRET_KEY }} && aws configure set region ap-south-1
-      
-    - name: Delete existing ECR image if exists
-      run: |  
-        IMAGE_EXISTS=$(aws ecr describe-images --repository-name development/demo-crm --image-ids imageTag=latest --region ap-south-1 --query 'imageDetails' --output text || echo "NOT_FOUND")
-        if [[ "$IMAGE_EXISTS" != "NOT_FOUND" ]]; then
-          echo "Deleting existing image..."
-          aws ecr batch-delete-image --repository-name development/demo-crm --image-ids imageTag=latest --region ap-south-1
-        else
-          echo "No existing image to delete."
-        fi
         
     - name: Authenticat Docker to ECR 
       run: aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 881490105022.dkr.ecr.ap-south-1.amazonaws.com
@@ -88,6 +77,9 @@ jobs:
       
     - name: Push Docker image to ECR
       run: docker push 881490105022.dkr.ecr.ap-south-1.amazonaws.com/development/demo-crm:latest
+
+    - name: container delete
+      run: docker compose down
       
   deploy:
     runs-on: ubuntu-latest
