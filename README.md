@@ -70,11 +70,11 @@ Follow these instructions to set up the project locally and deploy it to your cl
 
 ### Infrastructure Setup
 
-1. **[create ECR]**
+1. **create ECR**
 
 in AWS user create ECR at the required region
 
-2. **[create EKS cluster]**
+2. **create EKS cluster**
 
 run: terraform apply to with the cluster create modle 
 
