@@ -10,13 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [[$class: 'CloneOption', noTags: false, depth: 0, shallow: false]],
-                    userRemoteConfigs: [[url: 'https://github.com/idrr1993/Application.git']]
-                ])
+                checkout scm
             }
         }
 
