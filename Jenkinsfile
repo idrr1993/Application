@@ -10,7 +10,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [[$class: 'CloneOption', noTags: false, depth: 0, shallow: false]],
+                    userRemoteConfigs: [[url: 'https://github.com/idrr1993/Application.git']]
+                ])
             }
         }
 
@@ -58,8 +64,7 @@ pipeline {
         stage('Generate Git Tag') {
             steps {
                 script {
-                    
-                    sh 'git rev-parse --short HEAD > GIT_SHA.txt'
+                    sh 'git rev-parse --short HEAD > GIT_SHA.txt || echo "0000000" > GIT_SHA.txt'
                     env.GIT_COMMIT_SHORT = readFile('GIT_SHA.txt').trim()
                     env.IMAGE_TAG = "demo-crm:${env.GIT_COMMIT_SHORT}"
                     echo "Using image tag: ${env.IMAGE_TAG}"
