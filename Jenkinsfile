@@ -48,6 +48,12 @@ pipeline {
             }
         }
 
+        stage('Test Docker CLI') {
+            steps {
+                sh 'docker --version'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t demo-crm:latest .'
