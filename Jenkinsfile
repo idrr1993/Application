@@ -3,10 +3,11 @@ pipeline {
 
     environment {
         NODE_VERSION = '20'
+        GIT_COMMIT_SHORT = ''
+        IMAGE_TAG = ''
     }
 
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -54,9 +55,20 @@ pipeline {
             }
         }
 
+        stage('Generate Git Tag') {
+            steps {
+                script {
+                    env.GIT_COMMIT_SHORT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+                    env.IMAGE_TAG = "demo-crm:${env.GIT_COMMIT_SHORT}"
+                    echo "🔖 Using image tag: ${env.IMAGE_TAG}"
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t demo-crm:latest .'
+                sh 'docker build -t ${IMAGE_TAG} .'
+                sh 'docker tag ${IMAGE_TAG} demo-crm:latest'
             }
         }
 
