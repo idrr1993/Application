@@ -58,7 +58,9 @@ pipeline {
         stage('Generate Git Tag') {
             steps {
                 script {
-                    env.GIT_COMMIT_SHORT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+                    // 🔧 FIX: Ensure commit SHA is reliably captured
+                    sh 'git rev-parse --short HEAD > GIT_SHA.txt'
+                    env.GIT_COMMIT_SHORT = readFile('GIT_SHA.txt').trim()
                     env.IMAGE_TAG = "demo-crm:${env.GIT_COMMIT_SHORT}"
                     echo "🔖 Using image tag: ${env.IMAGE_TAG}"
                 }
@@ -67,8 +69,11 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t ${IMAGE_TAG} .'
-                sh 'docker tag ${IMAGE_TAG} demo-crm:latest'
+                script {
+                    echo "🛠 Building Docker image with tag: ${env.IMAGE_TAG}"
+                    sh "docker build -t ${env.IMAGE_TAG} ."
+                    sh "docker tag ${env.IMAGE_TAG} demo-crm:latest"
+                }
             }
         }
 
