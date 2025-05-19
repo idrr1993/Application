@@ -14,7 +14,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
       MONGODB_URI: ${MONGODB_URI}
-    healthcheck: "check if container is up"
+    healthcheck: #check if container is up
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s
       timeout: 5s
