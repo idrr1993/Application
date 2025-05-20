@@ -49,11 +49,6 @@ pipeline {
             }
         }
 
-        stage('Test Docker CLI') {
-            steps {
-                sh 'docker --version'
-            }
-        }
 
         stage('Generate Git Tag') {
             steps {
